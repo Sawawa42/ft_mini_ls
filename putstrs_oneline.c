@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   putstrs_oneline.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 16:53:30 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/23 21:29:59 by syamasaw         ###   ########.fr       */
+/*   Created: 2024/01/23 20:00:56 by syamasaw          #+#    #+#             */
+/*   Updated: 2024/01/23 20:06:50 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_mini_ls.h"
 
-int	main(int argc, char *argv[])
+void	putstrs_oneline(t_data *data, int num_of_segments)
 {
-	(void)argv;
-	if (argc != 1)
+	int	i;
+
+	i = 0;
+	while (i < num_of_segments)
 	{
-		ft_putstr_fd(ARG_ERROR, 2);
-		return (1);
+		if (data[i].dot_file == false)
+		{
+			ft_putstr_fd(data[i].name, 1);
+			ft_putstr_fd("\n", 1);
+		}
+		i++;
 	}
-	else
-		if (!ls_work("."))
-			return (1);
-	return (0);
 }
