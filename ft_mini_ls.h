@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 12:43:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/23 21:29:46 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:28:04 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef struct s_dirs_data
 void	ft_putstr_fd(const char *str, int fd);
 bool	ls_work(const char *path);
 DIR		*wrapper_opendir(const char *path);
-void	sort_last_update(t_data *data, int num_of_segments);
+void	sort_time_rev(t_data *data, int num_of_segments);
+int		ft_strcmp(const char *s1, const char *s2);
 void	putstrs_oneline(t_data *data, int num_of_segments);
 
 #endif

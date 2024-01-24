@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:55:49 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/23 21:19:41 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:29:17 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,18 @@ void	ft_putstr_fd(const char *str, int fd)
 	}
 }
 
-//小<- UNIX秒 ->大の並べ替え
-void	sort_last_update(t_data *data, int num_of_segments)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		j;
-	int		i;
-	t_data	tmp_data;
+	size_t			i;
+	unsigned char	*cast_s1;
+	unsigned char	*cast_s2;
 
 	i = 0;
-	while (i < num_of_segments - 1)
+	cast_s1 = (unsigned char *)s1;
+	cast_s2 = (unsigned char *)s2;
+	while (cast_s1[i] == cast_s2[i] && cast_s1[i] != '\0' && cast_s2[i] != '\0')
 	{
-		j = num_of_segments - 1;
-		while (j > i)
-		{
-			if (data[j - 1].last_update > data[j].last_update)
-			{
-				tmp_data = data[j - 1];
-				data[j - 1] = data[j];
-				data[j] = tmp_data;
-			}
-			j--;
-		}
 		i++;
 	}
+	return (cast_s1[i] - cast_s2[i]);
 }

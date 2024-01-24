@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/23 21:29:33 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:28:33 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	ls_work(const char *path)
 	data = set_dir_data(num_of_segments, dir_ptr);
 	if (!data)
 		return (false);
-	sort_last_update(data, num_of_segments);
+	sort_time_rev(data, num_of_segments);
 	putstrs_oneline(data, num_of_segments);
 	closedir(dir_ptr);
 	free(data);

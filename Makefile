@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/01/23 21:28:42 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/01/24 13:48:42 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = ft_mini_ls
 CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS = main.c ls_work.c putstrs_oneline.c utils.c
+SRCS = main.c ls_work.c putstrs_oneline.c utils.c sorts.c
 
 OBJ_DIR = ./obj/
 OBJS = $(SRCS:%.c=$(OBJ_DIR)%.o)
