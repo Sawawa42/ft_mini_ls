@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/24 13:28:33 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:52:57 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
 		set_struct(dir_ptr, data, i);
 		i++;
 	}
+	printf("\n\n%hu\n\n", data[0].info.st_mode);
 	return (data);
 }
 
@@ -84,7 +85,7 @@ static void	set_struct(DIR *dir_ptr, t_data *data, int i)
 {
 	data[i].dp = readdir(dir_ptr);
 	data[i].name = data[i].dp->d_name;
-	stat(data[i].name, &data[i].info);
+	lstat(data[i].name, &data[i].info);
 	data[i].last_update = data[i].info.st_ctime;
 	if (data[i].name[0] == '.')
 		data[i].dot_file = true;

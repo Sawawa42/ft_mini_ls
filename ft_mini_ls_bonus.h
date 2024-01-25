@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_mini_ls.h                                       :+:      :+:    :+:   */
+/*   ft_mini_ls_bonus.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 12:43:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/24 18:39:40 by syamasaw         ###   ########.fr       */
+/*   Created: 2024/01/24 18:38:16 by syamasaw          #+#    #+#             */
+/*   Updated: 2024/01/25 15:06:49 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINI_LS_H
-# define FT_MINI_LS_H
+#ifndef FT_MINI_LS_BONUS_H
+# define FT_MINI_LS_BONUS_H
 # include <unistd.h>
 # include <sys/stat.h>
 # include <stdbool.h>
@@ -32,11 +32,18 @@ typedef struct s_dirs_data
 	bool			dot_file;
 }					t_data;
 
-void	ft_putstr_fd(const char *str, int fd);
-bool	ls_work(const char *path);
-DIR		*wrapper_opendir(const char *path);
-void	sort_time_rev(t_data *data, int num_of_segments);
-int		ft_strcmp(const char *s1, const char *s2);
-void	putstrs_oneline(t_data *data, int num_of_segments);
+//相反する条件の場合、最後に指定したオプションが適用(t,U 1,m)
+typedef struct s_args_data
+{
+	int		number_of_paths;//パスの個数
+	bool	oneline;//== -1, 有効ならtrue
+	bool	sort_time;//== -t, 更新時間順、最近のが上
+	bool	sort_rev;//== -r, 表示順序を逆にする
+	bool	add_color;//== -G, 色を付ける
+	bool	recursive;//== -R, 再帰的に表示、ディレクトリがあったらその中を出す 他のソートと合わせるとだいぶめんどう
+	bool	unsort;//== -U, lsはデフォでアルファベット順にするが、ソートを一切しない。
+	bool	separate_comma;//== -m, カンマ区切りにする
+	bool	fin_use_option;//trueならパスとみなす
+}		t_args_data;
 
 #endif
