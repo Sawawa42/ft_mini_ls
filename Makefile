@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/01/24 13:48:42 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/01/29 15:55:52 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,10 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra
 
 SRCS = main.c ls_work.c putstrs_oneline.c utils.c sorts.c
+
+ifdef BONUS_FLAG
+SRCS = main_bonus.c utils_bonus.c set_options_bonus.c
+endif
 
 OBJ_DIR = ./obj/
 OBJS = $(SRCS:%.c=$(OBJ_DIR)%.o)
@@ -31,6 +35,9 @@ $(OBJ_DIR)%.o: %.c
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
 
+bonus:
+	make BONUS_FLAG=1
+
 clean:
 	rm -rf $(OBJ_DIR)
 
@@ -39,4 +46,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all debug clean fclean re

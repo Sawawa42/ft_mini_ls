@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/24 15:52:57 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:50:19 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
 		set_struct(dir_ptr, data, i);
 		i++;
 	}
-	printf("\n\n%hu\n\n", data[0].info.st_mode);
 	return (data);
 }
 
