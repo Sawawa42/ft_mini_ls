@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/01/30 14:29:27 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/01/30 15:16:43 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC_DIR := $(BSRC_DIR)
 OBJ_DIR := $(BOBJ_DIR)
 endif
 
+
+
 all: $(OBJ_DIR) $(NAME)
 
 $(OBJ_DIR):
@@ -69,8 +71,12 @@ clean:
 fclean: clean
 	rm -f $(NAME) $(BNAME)
 
-re: fclean all
+re:
+	rm -rf $(OBJ_DIR)
+	@make all
+ifeq ($(shell ls obj | grep "bonus"), bonus)
+	rm -rf $(BOBJ_DIR)
+	@make bonus
+endif
 
-re-bonus: fclean bonus
-
-.PHONY: all bonus clean fclean re re-bonus
+.PHONY: all bonus clean fclean re
