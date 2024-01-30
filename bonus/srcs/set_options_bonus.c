@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:02:46 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/29 19:08:15 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:52:38 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_options(char *argv[], t_options *options)
 
 	i = 1;
 	init_options(options);
-	while (is_valid_option(argv[i]) != false)
+	while (argv[i] != '\0' && is_valid_option(argv[i]) == 1)//パスではないなら
 	{
 		j = 0;
 		while (argv[i][j] != '\0')

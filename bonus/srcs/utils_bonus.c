@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:01:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/29 19:20:00 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/30 12:33:14 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,30 @@ int	ft_putstr_fd(const char *str, int fd)
 int	count_paths(int argc, char *argv[])
 {
 	int	i;
+	int	type;
 
 	i = 1;
 	while (i < argc)
 	{
-		if (is_valid_option(argv[i]) == false)
+		type = is_valid_option(argv[i]);
+		if (type == 0)
 			return (argc - i);
+		else if (type == -1)
+			return (-1);
 		i++;
 	}	
 	return (0);
 }
 
+//パスの後に書かれたオプションは有効無効関わらずパスとして扱う
+//先頭が-であるものはパスとして扱い、無効ならusage error
+//ls -l . -2 or ls -l -2 .(usage error)のように、最後のオプション
+
 /*
 Pass a string and return true if it is a valid option,
 or false if it is a path.
 */
-bool	is_valid_option(char *arg)
+int	is_valid_option(char *arg)
 {
 	int	i;
 
@@ -55,13 +63,13 @@ bool	is_valid_option(char *arg)
 		while (arg[i] != '\0')
 		{
 			if (strchr(AVAILABLE_OPTIONS, arg[i]) == NULL)
-				return (false);
+				return (-1);//-かつ存在しないオプション, -1
 			i++;
 		}
 	}
 	else
-		return (false);
-	return (true);
+		return (0);//-ではない、パスにあたる, 0
+	return (1);//オプションである, 1
 }
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
