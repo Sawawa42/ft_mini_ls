@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 15:17:21 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/05 17:56:55 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:03:19 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ static void	choice_color(t_data *data, t_options option, int i)
 	else if (S_ISLNK(data[i].info.st_mode))
 		write(1, "\e[35m", 5);
 	else if (S_ISSOCK(data[i].info.st_mode))
-		write(1, "\e[32m", 5);	
+		write(1, "\e[32m", 5);
 	else if (S_ISFIFO(data[i].info.st_mode))
 		write(1, "\e[38;2;143;101;82m", 19);
-	else if (data[i].info.st_mode & S_IXUSR || data[i].info.st_mode & S_IXGRP || data[i].info.st_mode & S_IXOTH)
+	else if (data[i].info.st_mode & S_IXUSR || data[i].info.st_mode & S_IXGRP \
+		|| data[i].info.st_mode & S_IXOTH)
 		write(1, "\x1b[31m", 5);
+	else if (S_ISCHR(data[i].info.st_mode))
+		write(1, "\x1b[34m\e[38;2;143;101;82m", 8);
+	else if (S_ISBLK(data[i].info.st_mode))
+		write(1, "\x1b[34;46m", 8);
 	else
 		write(1, "\e[0m", 4);
-}
-
-int	ft_look_permission(t_data *data, int i)
-{
-	return (data[i].info.st_mode & 0777);
 }
