@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/01/30 15:16:43 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/02/05 16:00:21 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ SRCS = main.c ls_work.c putstrs_oneline.c utils.c sorts.c
 SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
 BSRC_DIR = ./bonus/srcs/
-BSRCS = main_bonus.c set_options_bonus.c utils_bonus.c
+BSRCS = main_bonus.c set_options_bonus.c utils_bonus.c control_for_current_bonus.c load_dir_utils_bonus.c \
+		put_result_bonus.c sorts_bonus.c put_result_oneline_bonus.c put_result_comma_bonus.c put_str_color_bonus.c
 BSRCS := $(addprefix $(BSRC_DIR), $(BSRCS))
 
 TMP_DIR = ./obj/
@@ -48,8 +49,6 @@ OBJS := $(BOBJS)
 SRC_DIR := $(BSRC_DIR)
 OBJ_DIR := $(BOBJ_DIR)
 endif
-
-
 
 all: $(OBJ_DIR) $(NAME)
 

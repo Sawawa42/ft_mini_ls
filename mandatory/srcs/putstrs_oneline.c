@@ -6,11 +6,11 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:00:56 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/23 21:58:37 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:29:48 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls.h"
+#include "../includes/ft_mini_ls.h"
 
 void	putstrs_oneline(t_data *data, int num_of_segments)
 {

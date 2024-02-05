@@ -1,44 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_work.c                                          :+:      :+:    :+:   */
+/*   load_dir_utils_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 15:29:26 by syamasaw         ###   ########.fr       */
+/*   Created: 2024/01/30 16:25:04 by syamasaw          #+#    #+#             */
+/*   Updated: 2024/01/30 16:26:01 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_mini_ls.h"
+#include "../includes/ft_mini_ls_bonus.h"
 
-static int		word_count_lines(const char *path);
-static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr);
-static void		set_struct(DIR *dir_ptr, t_data *data, int i);
+static void	set_struct(DIR *dir_ptr, t_data *data, int i);
 
-bool	ls_work(const char *path)
-{
-	int		num_of_segments;
-	DIR		*dir_ptr;
-	t_data	*data;
-
-	num_of_segments = word_count_lines(path);
-	if (num_of_segments < 0)
-		return (false);
-	dir_ptr = wrapper_opendir(path);
-	if (!dir_ptr)
-		return (false);
-	data = set_dir_data(num_of_segments, dir_ptr);
-	if (!data)
-		return (false);
-	sort_time_rev(data, num_of_segments);
-	putstrs_oneline(data, num_of_segments);
-	closedir(dir_ptr);
-	free(data);
-	return (true);
-}
-
-static int	word_count_lines(const char *path)
+int	count_files_and_dirs(const char *path)
 {
 	DIR				*dir_ptr;
 	struct dirent	*dp;
@@ -59,7 +35,20 @@ static int	word_count_lines(const char *path)
 	return (num_of_segments);
 }
 
-static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
+DIR	*wrapper_opendir(const char *path)
+{
+	DIR	*ret_dir_ptr;
+
+	ret_dir_ptr = opendir(path);
+	if (ret_dir_ptr == NULL)
+	{
+		ft_putstr_fd(OPENDIR_ERROR, 2);
+		return (NULL);
+	}
+	return (ret_dir_ptr);
+}
+
+t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
 {
 	t_data	*data;
 	int		i;

@@ -6,11 +6,11 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:28:54 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/24 13:50:35 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:29:54 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls.h"
+#include "../includes/ft_mini_ls.h"
 
 static void	swap_data(t_data *data, int j);
 

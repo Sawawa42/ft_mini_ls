@@ -6,11 +6,11 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:55:49 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/24 13:29:17 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:30:00 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls.h"
+#include "../includes/ft_mini_ls.h"
 
 DIR	*wrapper_opendir(const char *path)
 {

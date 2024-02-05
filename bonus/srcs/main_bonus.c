@@ -6,14 +6,16 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:37:48 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 13:00:24 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/05 13:01:09 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls_bonus.h"
+#include "../includes/ft_mini_ls_bonus.h"
 
 static char	**set_paths(int argc, char *argv[], int cnt_paths);
 static void	free_paths(char **paths, int size);
+
+//lsの空白は最も長いファイル名を基準に決定される...らしい
 
 int	main(int argc, char *argv[])
 {
@@ -26,7 +28,8 @@ int	main(int argc, char *argv[])
 		return (ft_putstr_fd(ILIGAL_OPTION, 2));
 	else if (cnt_paths == 0)
 	{
-		set_options(argv, &options);
+		if (control_for_current(argv) == false)
+			return (1);
 	}
 	else
 	{
@@ -35,9 +38,6 @@ int	main(int argc, char *argv[])
 		if (paths == NULL)
 			return (ft_putstr_fd(MALLOC_ERROR, 2));
 		//処理をここでやる
-		int i = -1;
-		while (++i < cnt_paths)
-			printf("%s\n", paths[i]);
 		free_paths(paths, cnt_paths);
 	}
 	return (0);

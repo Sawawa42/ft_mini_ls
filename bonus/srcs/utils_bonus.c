@@ -6,11 +6,11 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:01:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 12:33:14 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:17:47 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_mini_ls_bonus.h"
+#include "../includes/ft_mini_ls_bonus.h"
 
 //if fd=2,return 1. if fd=1,return 0.
 int	ft_putstr_fd(const char *str, int fd)
@@ -82,4 +82,20 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	while (n--)
 		*de++ = *sr++;
 	return (dest);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*cast_s1;
+	unsigned char	*cast_s2;
+
+	i = 0;
+	cast_s1 = (unsigned char *)s1;
+	cast_s2 = (unsigned char *)s2;
+	while (cast_s1[i] == cast_s2[i] && cast_s1[i] != '\0' && cast_s2[i] != '\0')
+	{
+		i++;
+	}
+	return (cast_s1[i] - cast_s2[i]);
 }
