@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:25:04 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 16:26:01 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:52:22 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int	count_files_and_dirs(const char *path)
 {
 	DIR				*dir_ptr;
 	struct dirent	*dp;
-	int				num_of_segments;
+	int				num_of_files;
 
 	dir_ptr = wrapper_opendir(path);
 	if (dir_ptr == NULL)
 		return (-1);
-	num_of_segments = 0;
+	num_of_files = 0;
 	while (1)
 	{
 		dp = readdir(dir_ptr);
 		if (dp == NULL)
 			break ;
-		num_of_segments++;
+		num_of_files++;
 	}
 	closedir(dir_ptr);
-	return (num_of_segments);
+	return (num_of_files);
 }
 
 DIR	*wrapper_opendir(const char *path)
@@ -42,26 +42,26 @@ DIR	*wrapper_opendir(const char *path)
 	ret_dir_ptr = opendir(path);
 	if (ret_dir_ptr == NULL)
 	{
-		ft_putstr_fd(OPENDIR_ERROR, 2);
+		putstr_fd(OPENDIR_ERROR, 2);
 		return (NULL);
 	}
 	return (ret_dir_ptr);
 }
 
-t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
+t_data	*set_dir_data(int num_of_files, DIR *dir_ptr)
 {
 	t_data	*data;
 	int		i;
 
-	data = (t_data *)malloc(num_of_segments * sizeof(t_data));
+	data = (t_data *)malloc(num_of_files * sizeof(t_data));
 	if (!data)
 	{
 		closedir(dir_ptr);
-		ft_putstr_fd(MALLOC_ERROR, 2);
+		putstr_fd(MALLOC_ERROR, 2);
 		return (NULL);
 	}
 	i = 0;
-	while (i < num_of_segments)
+	while (i < num_of_files)
 	{
 		set_struct(dir_ptr, data, i);
 		i++;
