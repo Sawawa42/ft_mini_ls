@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 13:45:14 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 16:55:18 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/09 20:57:03 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	put_result(t_data *data, t_option option, int i)
 	}
 	else
 	{
-		if (data[i].dot_file == false)
+		if (data[i].name[0] != '.')
 		{
 			putstr_color(data[i].name, i, data, option);
 			putstr_fd("\n", 1);

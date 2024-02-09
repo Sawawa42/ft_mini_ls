@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 14:02:59 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 16:51:18 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/09 20:56:29 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	put_result(t_data *data, int num_of_files, t_option option, int i)
 	}
 	else
 	{
-		if (data[i].dot_file == false)
+		if (data[i].name[0] != '.')
 		{
 			putstr_color(data[i].name, i, data, option);
 			if (i + 1 < num_of_files)
@@ -68,7 +68,7 @@ static void	put_result_rev(t_data *data, t_option option, int i)
 	}
 	else
 	{
-		if (data[i].dot_file == false)
+		if (data[i].name[0] != '.')
 		{
 			putstr_color(data[i].name, i, data, option);
 			if (i - 1 > 0)

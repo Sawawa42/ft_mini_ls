@@ -6,33 +6,33 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:25:04 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 16:52:22 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:11:01 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_mini_ls_bonus.h"
 
-static void	set_struct(DIR *dir_ptr, t_data *data, int i);
+static void	set_struct(DIR *dir_ptr, t_data *data, int i, char *path);
 
-int	count_files_and_dirs(const char *path)
+int	count_paths_in_dir(const char *path)
 {
 	DIR				*dir_ptr;
 	struct dirent	*dp;
-	int				num_of_files;
+	int				cnt_paths_in_dir;
 
-	dir_ptr = wrapper_opendir(path);
+	dir_ptr = wrapper_opendir(path);//パスがディレクトリではない場合、もしくはひらけなかった場合を考慮すべき
 	if (dir_ptr == NULL)
 		return (-1);
-	num_of_files = 0;
+	cnt_paths_in_dir = 0;
 	while (1)
 	{
 		dp = readdir(dir_ptr);
 		if (dp == NULL)
 			break ;
-		num_of_files++;
+		cnt_paths_in_dir++;
 	}
 	closedir(dir_ptr);
-	return (num_of_files);
+	return (cnt_paths_in_dir);
 }
 
 DIR	*wrapper_opendir(const char *path)
@@ -48,12 +48,12 @@ DIR	*wrapper_opendir(const char *path)
 	return (ret_dir_ptr);
 }
 
-t_data	*set_dir_data(int num_of_files, DIR *dir_ptr)
+t_data	*set_dir_data(int cnt_paths_in_dir, DIR *dir_ptr, char *path)
 {
 	t_data	*data;
 	int		i;
 
-	data = (t_data *)malloc(num_of_files * sizeof(t_data));
+	data = (t_data *)malloc(cnt_paths_in_dir * sizeof(t_data));
 	if (!data)
 	{
 		closedir(dir_ptr);
@@ -61,22 +61,23 @@ t_data	*set_dir_data(int num_of_files, DIR *dir_ptr)
 		return (NULL);
 	}
 	i = 0;
-	while (i < num_of_files)
+	while (i < cnt_paths_in_dir)
 	{
-		set_struct(dir_ptr, data, i);
+		set_struct(dir_ptr, data, i, path);
 		i++;
 	}
 	return (data);
 }
 
-static void	set_struct(DIR *dir_ptr, t_data *data, int i)
+static void	set_struct(DIR *dir_ptr, t_data *data, int i, char *path)
 {
-	data[i].dp = readdir(dir_ptr);
-	data[i].name = data[i].dp->d_name;
-	lstat(data[i].name, &data[i].info);
-	data[i].last_update = data[i].info.st_ctime;
-	if (data[i].name[0] == '.')
-		data[i].dot_file = true;
-	else
-		data[i].dot_file = false;
+	struct dirent	*dp;
+
+	dp = readdir(dir_ptr);
+	data[i].name = dp->d_name;
+	if (lstat(pathjoin(path, dp->d_name), &data[i].info) == -1)// pathjoin内にmalloc
+	{
+		perror("lstat");
+		exit(EXIT_FAILURE);
+	}
 }

@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/02/08 19:35:00 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/02/09 21:44:52 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = main.c ls_work.c putstrs_oneline.c utils.c sorts.c
 SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
 BSRC_DIR = ./bonus/srcs/
-BSRCS = main_bonus.c set_option_bonus.c utils_bonus.c ls_single_path_bonus.c ls_paths_bonus.c load_dir_utils_bonus.c \
+BSRCS = main_bonus.c set_option_bonus.c utils_bonus.c ls_single_path_bonus.c ls_paths_bonus.c load_dir_utils_bonus.c set_data_bonus.c\
 		put_result_bonus.c sort_files_bonus.c put_result_oneline_bonus.c put_result_comma_bonus.c put_str_color_bonus.c sort_paths_bonus.c ft_funcs_bonus.c
 BSRCS := $(addprefix $(BSRC_DIR), $(BSRCS))
 

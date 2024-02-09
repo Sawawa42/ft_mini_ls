@@ -6,13 +6,15 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:01:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 16:49:03 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/09 19:40:00 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_mini_ls_bonus.h"
 
-//if fd=2,return 1. if fd=1,return 0.
+/*
+if fd=2,return 1. if fd=1,return 0.
+*/
 int	putstr_fd(const char *str, int fd)
 {
 	int	i;
@@ -26,7 +28,9 @@ int	putstr_fd(const char *str, int fd)
 	return (fd - 1);
 }
 
-//Count the number of paths.
+/*
+Count the number of paths.
+*/
 int	count_paths(int argc, char *argv[])
 {
 	int	i;
@@ -66,4 +70,24 @@ int	is_valid_option(char *arg)
 	else
 		return (0);
 	return (1);
+}
+
+/*
+Join two strings separated by "/".
+*/
+char	*pathjoin(char const *s1, char const *s2)
+{
+	size_t	lens1;
+	size_t	lens2;
+	char	*s1s2;
+
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	s1s2 = (char *)malloc((lens1 + lens2 + 2) * sizeof(char));
+	if (s1s2 == NULL)
+		return (NULL);
+	ft_memcpy(s1s2, s1, lens1);
+	ft_memcpy(s1s2 + lens1, "/", 1);
+	ft_memcpy(s1s2 + lens1 + 1, s2, lens2 + 1);
+	return (s1s2);
 }

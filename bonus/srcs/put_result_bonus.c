@@ -6,14 +6,14 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:23:00 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 18:54:31 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:12:59 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_mini_ls_bonus.h"
 
-static bool	paths(int cnt, int avail, t_option option, t_pdata *pdata);
-static bool	paths_rev(int cnt, int avail, t_option option, t_pdata *pdata);
+static bool	paths(int cnt, int avail, t_option option, t_data *data);
+static bool	paths_rev(int cnt, int avail, t_option option, t_data *data);
 
 void	control_put_result(t_data *data, int num_of_files, t_option option)
 {
@@ -26,22 +26,22 @@ void	control_put_result(t_data *data, int num_of_files, t_option option)
 }
 
 bool	put_result_paths(int cnt_paths, int avail_paths, t_option option, \
-		t_pdata *pdata)
+		t_data *data)
 {
 	if (option.sort_rev == true)
 	{
-		if (paths_rev(cnt_paths, avail_paths, option, pdata) == false)
+		if (paths_rev(cnt_paths, avail_paths, option, data) == false)
 			return (false);
 	}
 	else
 	{
-		if (paths(cnt_paths, avail_paths, option, pdata) == false)
+		if (paths(cnt_paths, avail_paths, option, data) == false)
 			return (false);
 	}
 	return (true);
 }
 
-static bool	paths(int cnt, int avail, t_option option, t_pdata *pdata)
+static bool	paths(int cnt, int avail, t_option option, t_data *data)
 {
 	int	i;
 
@@ -50,10 +50,10 @@ static bool	paths(int cnt, int avail, t_option option, t_pdata *pdata)
 	{
 		if (cnt > 1)
 		{
-			putstr_fd(pdata[i].name, 1);
+			putstr_fd(data[i].name, 1);
 			putstr_fd(":\n", 1);
 		}
-		if (ls_single_path(pdata[i].name, option) == false)
+		if (ls_single_path(data[i].name, option) == false)
 		{
 			return (false);
 		}
@@ -64,7 +64,7 @@ static bool	paths(int cnt, int avail, t_option option, t_pdata *pdata)
 	return (true);
 }
 
-static bool	paths_rev(int cnt, int avail, t_option option, t_pdata *pdata)
+static bool	paths_rev(int cnt, int avail, t_option option, t_data *data)
 {
 	int	i;
 
@@ -73,10 +73,10 @@ static bool	paths_rev(int cnt, int avail, t_option option, t_pdata *pdata)
 	{
 		if (cnt > 1)
 		{
-			putstr_fd(pdata[i].name, 1);
+			putstr_fd(data[i].name, 1);
 			putstr_fd(":\n", 1);
 		}
-		if (ls_single_path(pdata[i].name, option) == false)
+		if (ls_single_path(data[i].name, option) == false)
 		{
 			return (false);
 		}
