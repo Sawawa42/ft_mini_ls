@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:38:16 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/09 21:57:05 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:39:16 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/stat.h>
 # include <unistd.h>
 # define ILIGAL_OPTION "ft_mini_ls_bonus: illegal option\n\
-usage : ./ft_mini_ls_bonus [-1trGUm] [file ...]\n"
+usage : ./ft_mini_ls_bonus [-1traGUm] [file ...]\n"
 # define OPENDIR_ERROR "ft_mini_ls_bonus: Failed to open directory.\n"
 # define MALLOC_ERROR "ft_mini_ls_bonus: Failed to allocate memory.\n"
 # define AVAILABLE_OPTIONS "1trGmaS"
@@ -52,8 +52,8 @@ bool	ls_paths(int argc, char *argv[], int cnt_paths, t_option option);
 /*set_option_bonus.c*/
 void	set_option(char *argv[], t_option *option);
 
-/*sort_files_bonus.c*/
-void	sort_paths_in_dir(t_data *data, int num_of_segments, t_option option);
+/*sort_t_data.c*/
+void	sort_t_data(t_data *data, int len_of_data, t_option option);
 
 /*load_dir_utils_bonus.c*/
 int		count_paths_in_dir(const char *path);
@@ -63,16 +63,18 @@ t_data	*set_dir_data(int num_of_files, DIR *dir_ptr, char *path);
 /*put_str_color_bonus.c*/
 int		putstr_color(const char *str, int i, t_data *data, t_option option);
 
-void	control_put_result(t_data *data, int num_of_segments, t_option option);
-bool	put_result_paths(int cnt_paths, int avail_paths, t_option option, \
+void	control_put_result(t_data *data, int num_of_files, t_option option);
+bool	control_put_dir(int cnt_paths, int num_of_dir, t_option option, \
 		t_data *data);
 void	put_result_comma(t_data *data, int num_of_segments, t_option option);
 void	put_result_oneline(t_data *data, int num_of_segments, t_option option);
-// t_data	*sort_paths(char **paths, int cnt_paths, t_option option);
-void	sort_paths(t_data *data, int avail_paths, t_option option);
 
-t_data	*set_avail_dir(char **paths, int avail_dirs);
-t_data	*set_files_data(char **paths, int files);
+t_data	*set_avail_dir(char **arg_paths, int num_of_dir, t_option option);
+t_data	*set_files_data(char **arg_paths, int num_of_files, t_option option);
+
+/*set_arg_paths_bonus.c*/
+char	**set_arg_paths(int argc, char *argv[], int cnt_paths);
+void	free_paths(char **arg_paths, int size);
 
 /*set_option_bonus.c*/
 void	set_option(char *argv[], t_option *option);

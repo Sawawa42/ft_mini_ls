@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:25:04 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/09 22:11:01 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:34:11 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	count_paths_in_dir(const char *path)
 	struct dirent	*dp;
 	int				cnt_paths_in_dir;
 
-	dir_ptr = wrapper_opendir(path);//パスがディレクトリではない場合、もしくはひらけなかった場合を考慮すべき
+	dir_ptr = wrapper_opendir(path);
 	if (dir_ptr == NULL)
 		return (-1);
 	cnt_paths_in_dir = 0;
@@ -75,7 +75,7 @@ static void	set_struct(DIR *dir_ptr, t_data *data, int i, char *path)
 
 	dp = readdir(dir_ptr);
 	data[i].name = dp->d_name;
-	if (lstat(pathjoin(path, dp->d_name), &data[i].info) == -1)// pathjoin内にmalloc
+	if (lstat(pathjoin(path, dp->d_name), &data[i].info) == -1)
 	{
 		perror("lstat");
 		exit(EXIT_FAILURE);

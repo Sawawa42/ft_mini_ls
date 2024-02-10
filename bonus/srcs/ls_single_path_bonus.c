@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:48:02 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/09 19:13:20 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:19:09 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	ls_single_path(char *path, t_option option)
 	data = set_dir_data(cnt_paths_in_dir, dir_ptr, path);
 	if (!data)
 		return (false);
-	sort_paths_in_dir(data, cnt_paths_in_dir, option);
+	sort_t_data(data, cnt_paths_in_dir, option);
 	control_put_result(data, cnt_paths_in_dir, option);
 	closedir(dir_ptr);
 	free(data);

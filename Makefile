@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/02/09 21:44:52 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/02/10 18:59:58 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
 BSRC_DIR = ./bonus/srcs/
 BSRCS = main_bonus.c set_option_bonus.c utils_bonus.c ls_single_path_bonus.c ls_paths_bonus.c load_dir_utils_bonus.c set_data_bonus.c\
-		put_result_bonus.c sort_files_bonus.c put_result_oneline_bonus.c put_result_comma_bonus.c put_str_color_bonus.c sort_paths_bonus.c ft_funcs_bonus.c
+		put_result_bonus.c put_result_oneline_bonus.c put_result_comma_bonus.c put_str_color_bonus.c sort_t_data.c ft_funcs_bonus.c set_arg_paths_bonus.c \
+		put_dir_bonus.c
 BSRCS := $(addprefix $(BSRC_DIR), $(BSRCS))
 
 TMP_DIR = ./obj/
