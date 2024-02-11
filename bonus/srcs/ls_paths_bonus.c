@@ -6,13 +6,13 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:44:34 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/10 20:46:41 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:24:52 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_mini_ls_bonus.h"
 
-static int	count_dir(char **arg_paths, int cnt_paths);
+static int	count_dir(char **arg_paths, int cnt_paths, t_option *option);
 static int	count_files(char **arg_paths, int cnt_paths);
 static void	put_no_such(char *arg_path);
 static bool	put_file(char **arg_paths, int num_of_files, t_option option);
@@ -27,8 +27,8 @@ bool	ls_paths(int argc, char *argv[], int cnt_paths, t_option option)
 	arg_dir_data = NULL;
 	arg_paths = set_arg_paths(argc, argv, cnt_paths);
 	if (!arg_paths)
-		return (false);
-	num_of_dir = count_dir(arg_paths, cnt_paths);
+		return (puterror(MALLOC_ERROR), false);
+	num_of_dir = count_dir(arg_paths, cnt_paths, &option);
 	num_of_files = count_files(arg_paths, cnt_paths);
 	if (cnt_paths > num_of_dir)
 		if (put_file(arg_paths, num_of_files, option) == false)
@@ -38,10 +38,11 @@ bool	ls_paths(int argc, char *argv[], int cnt_paths, t_option option)
 		return (free_paths(arg_paths, cnt_paths), false);
 	if (control_put_dir(cnt_paths, num_of_dir, option, arg_dir_data) == false)
 		return (free_paths(arg_paths, cnt_paths), free(arg_dir_data), false);
-	return (free_paths(arg_paths, cnt_paths), free(arg_dir_data), true);
+	free_paths(arg_paths, cnt_paths);
+	return (free(arg_dir_data), option.exit_code);
 }
 
-static int	count_dir(char **arg_paths, int cnt_paths)
+static int	count_dir(char **arg_paths, int cnt_paths, t_option *option)
 {
 	int				i;
 	int				cnt;
@@ -56,7 +57,10 @@ static int	count_dir(char **arg_paths, int cnt_paths)
 		if (dir == NULL)
 		{
 			if (lstat(arg_paths[i], &info) == -1)
+			{
+				option->exit_code = false;
 				put_no_such(arg_paths[i]);
+			}
 			cnt--;
 		}
 		else

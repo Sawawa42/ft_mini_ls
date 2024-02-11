@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:53:30 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 15:29:44 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:53:34 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	main(int argc, char *argv[])
 	(void)argv;
 	if (argc != 1)
 	{
-		ft_putstr_fd(ARG_ERROR, 2);
+		puterror(ARG_ERROR);
 		return (1);
 	}
 	else
-		if (!ls_work("."))
+		if (!ls_current("."))
 			return (1);
 	return (0);
 }

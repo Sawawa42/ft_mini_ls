@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_work.c                                          :+:      :+:    :+:   */
+/*   ls_current.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 15:29:26 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 16:09:38 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int		word_count_lines(const char *path);
 static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr);
-static void		set_struct(DIR *dir_ptr, t_data *data, int i);
+static bool		set_struct(DIR *dir_ptr, t_data *data, int i);
 
-bool	ls_work(const char *path)
+bool	ls_current(const char *path)
 {
 	int		num_of_segments;
 	DIR		*dir_ptr;
@@ -68,26 +68,33 @@ static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr)
 	if (!data)
 	{
 		closedir(dir_ptr);
-		ft_putstr_fd(MALLOC_ERROR, 2);
+		puterror(MALLOC_ERROR);
 		return (NULL);
 	}
 	i = 0;
 	while (i < num_of_segments)
 	{
-		set_struct(dir_ptr, data, i);
+		if (set_struct(dir_ptr, data, i) == false)
+		{
+			closedir(dir_ptr);
+			free(data);
+			return (NULL);
+		}
 		i++;
 	}
 	return (data);
 }
 
-static void	set_struct(DIR *dir_ptr, t_data *data, int i)
+static bool	set_struct(DIR *dir_ptr, t_data *data, int i)
 {
-	data[i].dp = readdir(dir_ptr);
-	data[i].name = data[i].dp->d_name;
-	lstat(data[i].name, &data[i].info);
-	data[i].last_update = data[i].info.st_ctime;
-	if (data[i].name[0] == '.')
-		data[i].dot_file = true;
-	else
-		data[i].dot_file = false;
+	struct dirent	*dp;
+
+	dp = readdir(dir_ptr);
+	data[i].name = dp->d_name;
+	if (lstat(data[i].name, &data[i].info) == -1)
+	{
+		puterror(LSTAT_ERROR);
+		return (false);
+	}
+	return (true);
 }

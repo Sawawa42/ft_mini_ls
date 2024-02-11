@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 14:02:46 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/08 15:54:00 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 14:56:03 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	init_option(t_option *option)
 	option->separate_comma = false;
 	option->print_all = false;
 	option->sort_size = false;
+	option->exit_code = true;
 }
 
 static void	control_settings(char c, t_option *option)

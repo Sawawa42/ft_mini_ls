@@ -6,30 +6,103 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:48:02 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/10 17:19:09 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:09:46 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_mini_ls_bonus.h"
 
+static int		count_paths_in_dir(const char *path);
+static DIR		*wrapper_opendir(const char *path);
+static t_data	*set_dir_data(int num_of_paths, DIR *dir_ptr, char *path);
+static bool		set_struct(DIR *dir_ptr, t_data *data, int i, char *path);
+
 bool	ls_single_path(char *path, t_option option)
 {
-	int		cnt_paths_in_dir;
+	int		num_of_paths;
 	DIR		*dir_ptr;
 	t_data	*data;
 
-	cnt_paths_in_dir = count_paths_in_dir(path);
-	if (cnt_paths_in_dir < 0)
+	num_of_paths = count_paths_in_dir(path);
+	if (num_of_paths < 0)
 		return (false);
 	dir_ptr = wrapper_opendir(path);
 	if (!dir_ptr)
 		return (false);
-	data = set_dir_data(cnt_paths_in_dir, dir_ptr, path);
+	data = set_dir_data(num_of_paths, dir_ptr, path);
 	if (!data)
 		return (false);
-	sort_t_data(data, cnt_paths_in_dir, option);
-	control_put_result(data, cnt_paths_in_dir, option);
+	sort_t_data(data, num_of_paths, option);
+	control_put_result(data, num_of_paths, option);
 	closedir(dir_ptr);
 	free(data);
+	return (true);
+}
+
+static int	count_paths_in_dir(const char *path)
+{
+	DIR				*dir_ptr;
+	struct dirent	*dp;
+	int				num_of_paths;
+
+	dir_ptr = wrapper_opendir(path);
+	if (dir_ptr == NULL)
+		return (-1);
+	num_of_paths = 0;
+	while (1)
+	{
+		dp = readdir(dir_ptr);
+		if (dp == NULL)
+			break ;
+		num_of_paths++;
+	}
+	closedir(dir_ptr);
+	return (num_of_paths);
+}
+
+static DIR	*wrapper_opendir(const char *path)
+{
+	DIR	*dir_ptr;
+
+	dir_ptr = opendir(path);
+	if (dir_ptr == NULL)
+		return (puterror(OPENDIR_ERROR));
+	return (dir_ptr);
+}
+
+static t_data	*set_dir_data(int num_of_paths, DIR *dir_ptr, char *path)
+{
+	t_data	*data;
+	int		i;
+
+	data = (t_data *)malloc(num_of_paths * sizeof(t_data));
+	if (!data)
+	{
+		closedir(dir_ptr);
+		return (puterror(MALLOC_ERROR));
+	}
+	i = -1;
+	while (++i < num_of_paths)
+		if (set_struct(dir_ptr, data, i, path) == false)
+			return (NULL);
+	return (data);
+}
+
+static bool	set_struct(DIR *dir_ptr, t_data *data, int i, char *path)
+{
+	struct dirent	*dp;
+	char			*longpath;
+
+	dp = readdir(dir_ptr);
+	data[i].name = dp->d_name;
+	longpath = pathjoin(path, dp->d_name);
+	if (!longpath)
+		return (puterror(MALLOC_ERROR), false);
+	if (lstat(longpath, &data[i].info) == -1)
+	{
+		puterror(LSTAT_ERROR);
+		return (free(longpath), false);
+	}
+	free(longpath);
 	return (true);
 }

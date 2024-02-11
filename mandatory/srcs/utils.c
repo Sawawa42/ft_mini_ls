@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 20:55:49 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/01/30 15:30:00 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:50:47 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ DIR	*wrapper_opendir(const char *path)
 	ret_dir_ptr = opendir(path);
 	if (ret_dir_ptr == NULL)
 	{
-		ft_putstr_fd(OPENDIR_ERROR, 2);
+		puterror(OPENDIR_ERROR);
 		return (NULL);
 	}
 	return (ret_dir_ptr);
@@ -47,8 +47,12 @@ int	ft_strcmp(const char *s1, const char *s2)
 	cast_s1 = (unsigned char *)s1;
 	cast_s2 = (unsigned char *)s2;
 	while (cast_s1[i] == cast_s2[i] && cast_s1[i] != '\0' && cast_s2[i] != '\0')
-	{
 		i++;
-	}
 	return (cast_s1[i] - cast_s2[i]);
+}
+
+void	puterror(char *error)
+{
+	ft_putstr_fd(COMMAND_NAME, 2);
+	ft_putstr_fd(error, 2);
 }

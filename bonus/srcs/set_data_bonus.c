@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:34:29 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/10 19:02:50 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 15:24:45 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_data	*set_avail_dir(char **arg_paths, int num_of_dir, t_option option)
 
 	ret_data = (t_data *)malloc(num_of_dir * sizeof(t_data));
 	if (!ret_data)
-		return (NULL);
+		return (puterror(MALLOC_ERROR));
 	i = 0;
 	j = 0;
 	while (i < num_of_dir)
@@ -49,7 +49,7 @@ t_data	*set_files_data(char **arg_paths, int num_of_files, t_option option)
 
 	ret_data = (t_data *)malloc(num_of_files * sizeof(t_data));
 	if (!ret_data)
-		return (NULL);
+		return (puterror(MALLOC_ERROR));
 	i = 0;
 	j = 0;
 	while (i < num_of_files)
