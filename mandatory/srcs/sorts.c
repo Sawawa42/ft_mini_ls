@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:28:54 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:58:43 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/11 17:59:28 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sort_time_rev(t_data *data, int num_of_segments)
 			if (data[j - 1].info.st_mtime > data[j].info.st_mtime)
 				swap_data(data, j);
 			else if (data[j - 1].info.st_mtime == data[j].info.st_mtime)
-				if (ft_strcmp(data[j - 1].name, data[j].name) < 0)
+				if (ft_strcmp(data[j - 1].name, data[j].name) > 0)
 					swap_data(data, j);
 			j--;
 		}
