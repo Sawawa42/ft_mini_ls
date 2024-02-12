@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 21:21:53 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 16:09:38 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:47:28 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int		word_count_lines(const char *path);
 static t_data	*set_dir_data(int num_of_segments, DIR *dir_ptr);
 static bool		set_struct(DIR *dir_ptr, t_data *data, int i);
+static bool		close_and_free(t_data *data, DIR *dir_ptr);
 
 bool	ls_current(const char *path)
 {
@@ -31,8 +32,9 @@ bool	ls_current(const char *path)
 	data = set_dir_data(num_of_segments, dir_ptr);
 	if (!data)
 		return (false);
-	sort_time_rev(data, num_of_segments);
-	putstrs_oneline(data, num_of_segments);
+	if (merge_sort_time(data, num_of_segments) == false)
+		return (close_and_free(data, dir_ptr));
+	putresult_oneline_rev(data, num_of_segments);
 	closedir(dir_ptr);
 	free(data);
 	return (true);
@@ -97,4 +99,11 @@ static bool	set_struct(DIR *dir_ptr, t_data *data, int i)
 		return (false);
 	}
 	return (true);
+}
+
+static bool	close_and_free(t_data *data, DIR *dir_ptr)
+{
+	closedir(dir_ptr);
+	free(data);
+	return (false);
 }

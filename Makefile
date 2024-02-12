@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/02/12 17:03:41 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/02/12 19:45:12 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BHEADERS := ft_mini_ls_bonus.h
 BHEADERS := $(addprefix $(BHEADER_DIR), $(BHEADERS))
 
 SRC_DIR = ./mandatory/srcs/
-SRCS = main.c ls_current.c putstrs_oneline.c utils.c sorts.c
+SRCS = main.c ls_current.c putresult_oneline_rev.c utils.c merge_time.c
 SRCS := $(addprefix $(SRC_DIR), $(SRCS))
 
 BSRC_DIR = ./bonus/srcs/
@@ -30,6 +30,7 @@ BSRCS = main_bonus.c\
 		ls_single_path_bonus.c ls_paths_bonus.c\
 		set_option_bonus.c set_arg_paths_bonus.c set_data_bonus.c\
 		sort_t_data_bonus.c\
+		merge_ascii_bonus.c merge_size_bonus.c merge_time_bonus.c\
 		put_dir_bonus.c put_result_bonus.c put_result_oneline_bonus.c\
 		put_result_comma_bonus.c put_str_color_bonus.c\
 		utils_bonus.c ft_funcs_bonus.c exit_funcs_bonus.c

@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:46:08 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/12 15:00:34 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:24:44 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,11 @@ bool	free_all(char **arg_paths, int size, t_data *data, bool ret)
 	free_paths(arg_paths, size);
 	free(data);
 	return (ret);
+}
+
+bool	close_and_free(t_data *data, DIR *dir_ptr)
+{
+	closedir(dir_ptr);
+	free(data);
+	return (false);
 }

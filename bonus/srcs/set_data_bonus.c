@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 21:34:29 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:24:45 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:27:23 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ t_data	*set_avail_dir(char **arg_paths, int num_of_dir, t_option option)
 		}
 		j++;
 	}
-	sort_t_data(ret_data, num_of_dir, option);
+	if (sort_t_data(ret_data, num_of_dir, option) == false)
+		return (NULL);
 	return (ret_data);
 }
 
@@ -62,6 +63,7 @@ t_data	*set_files_data(char **arg_paths, int num_of_files, t_option option)
 				ret_data[i++].name = arg_paths[j];
 		j++;
 	}
-	sort_t_data(ret_data, num_of_files, option);
+	if (sort_t_data(ret_data, num_of_files, option) == false)
+		return (NULL);
 	return (ret_data);
 }

@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:38:16 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/12 16:25:41 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:30:51 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_option
 	bool	exit_code;
 }			t_option;
 
+typedef struct s_var
+{
+	int	right;
+	int	left;
+}		t_var;
+
 /*ls_single_path_bonus.c*/
 bool	ls_single_path(char *path, t_option option);
 
@@ -60,7 +66,16 @@ t_data	*set_avail_dir(char **arg_paths, int num_of_dir, t_option option);
 t_data	*set_files_data(char **arg_paths, int num_of_files, t_option option);
 
 /*sort_t_data_bonus.c*/
-void	sort_t_data(t_data *data, int len_of_data, t_option option);
+bool	sort_t_data(t_data *data, int len_of_data, t_option option);
+
+/*merge_ascii_bonus.c*/
+bool	merge_sort_ascii(t_data *data, int len_of_data);
+
+/*merge_size_bonus.c*/
+bool	merge_sort_size(t_data *data, int len_of_data);
+
+/*merge_time_bonus.c*/
+bool	merge_sort_time(t_data *data, int len_of_data);
 
 /*put_dir_bonus.c*/
 bool	control_put_dir(int cnt_paths, int num_of_dir, t_option option, \
@@ -94,4 +109,5 @@ size_t	ft_strlen(const char *str);
 void	*puterror(char *error);
 bool	free_paths(char **arg_paths, int size);
 bool	free_all(char **arg_paths, int size, t_data *data, bool ret);
+bool	close_and_free(t_data *data, DIR *dir_ptr);
 #endif
