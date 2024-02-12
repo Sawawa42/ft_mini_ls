@@ -6,24 +6,23 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:38:16 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/12 15:00:45 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 16:25:41 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MINI_LS_BONUS_H
 # define FT_MINI_LS_BONUS_H
-# include <dirent.h>
-# include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <sys/stat.h>
-# include <unistd.h>
 # define COMMAND_NAME "ft_mini_ls_bonus"
 # define LSTAT_ERROR ": Failed to open path.\n"
 # define OPENDIR_ERROR ": Failed to open directory.\n"
 # define MALLOC_ERROR ": Failed to allocate memory.\n"
 # define AVAILABLE_OPTIONS "1trGmaS"
+# include <dirent.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/stat.h>
+# include <unistd.h>
 
 typedef struct s_data
 {
