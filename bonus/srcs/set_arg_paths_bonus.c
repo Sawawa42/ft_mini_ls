@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 17:46:47 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/10 17:48:26 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:50:30 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**set_arg_paths(int argc, char *argv[], int cnt_paths)
 
 	ret_paths = (char **)malloc(cnt_paths * sizeof(char *));
 	if (ret_paths == NULL)
-		return (NULL);
+		return (puterror(MALLOC_ERROR));
 	i = 1;
 	while (is_valid_option(argv[i]) == 1)
 		i++;
@@ -38,17 +38,4 @@ char	**set_arg_paths(int argc, char *argv[], int cnt_paths)
 		j++;
 	}
 	return (ret_paths);
-}
-
-void	free_paths(char **arg_paths, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		free(arg_paths[i]);
-		i++;
-	}
-	free(arg_paths);
 }

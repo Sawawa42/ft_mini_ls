@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 18:38:16 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:35:26 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:00:45 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	set_option(char *argv[], t_option *option);
 
 /*set_arg_paths_bonus.c*/
 char	**set_arg_paths(int argc, char *argv[], int cnt_paths);
-void	free_paths(char **arg_paths, int size);
 
 /*set_data_bonus.c*/
 t_data	*set_avail_dir(char **arg_paths, int num_of_dir, t_option option);
@@ -82,7 +81,6 @@ int		putstr_color(const char *str, int i, t_data *data, t_option option);
 
 /*utils_bonus.c*/
 int		putstr_fd(const char *str, int fd);
-void	*puterror(char *error);
 int		count_paths(int argc, char *argv[]);
 int		is_valid_option(char *arg);
 char	*pathjoin(char const *s1, char const *s2);
@@ -92,4 +90,9 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
+
+/*exit_funcs_bonus.c*/
+void	*puterror(char *error);
+bool	free_paths(char **arg_paths, int size);
+bool	free_all(char **arg_paths, int size, t_data *data, bool ret);
 #endif

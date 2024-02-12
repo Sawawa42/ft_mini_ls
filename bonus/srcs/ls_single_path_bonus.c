@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:48:02 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:09:46 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:37:32 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,15 @@ static bool	set_struct(DIR *dir_ptr, t_data *data, int i, char *path)
 	data[i].name = dp->d_name;
 	longpath = pathjoin(path, dp->d_name);
 	if (!longpath)
-		return (puterror(MALLOC_ERROR), false);
+	{
+		puterror(MALLOC_ERROR);
+		return (false);
+	}
 	if (lstat(longpath, &data[i].info) == -1)
 	{
 		puterror(LSTAT_ERROR);
-		return (free(longpath), false);
+		free(longpath);
+		return (false);
 	}
 	free(longpath);
 	return (true);

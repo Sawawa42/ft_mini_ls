@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:44:34 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:24:52 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:58:42 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,18 @@ bool	ls_paths(int argc, char *argv[], int cnt_paths, t_option option)
 	arg_dir_data = NULL;
 	arg_paths = set_arg_paths(argc, argv, cnt_paths);
 	if (!arg_paths)
-		return (puterror(MALLOC_ERROR), false);
+		return (false);
 	num_of_dir = count_dir(arg_paths, cnt_paths, &option);
 	num_of_files = count_files(arg_paths, cnt_paths);
 	if (cnt_paths > num_of_dir)
 		if (put_file(arg_paths, num_of_files, option) == false)
-			return (free_paths(arg_paths, cnt_paths), false);
+			return (free_paths(arg_paths, cnt_paths));
 	arg_dir_data = set_avail_dir(arg_paths, num_of_dir, option);
 	if (!arg_dir_data)
-		return (free_paths(arg_paths, cnt_paths), false);
+		return (free_paths(arg_paths, cnt_paths));
 	if (control_put_dir(cnt_paths, num_of_dir, option, arg_dir_data) == false)
-		return (free_paths(arg_paths, cnt_paths), free(arg_dir_data), false);
-	free_paths(arg_paths, cnt_paths);
-	return (free(arg_dir_data), option.exit_code);
+		return (free_all(arg_paths, cnt_paths, arg_dir_data, false));
+	return (free_all(arg_paths, cnt_paths, arg_dir_data, option.exit_code));
 }
 
 static int	count_dir(char **arg_paths, int cnt_paths, t_option *option)

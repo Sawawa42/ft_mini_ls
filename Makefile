@@ -6,7 +6,7 @@
 #    By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 15:07:33 by syamasaw          #+#    #+#              #
-#    Updated: 2024/02/11 16:06:09 by syamasaw         ###   ########.fr        #
+#    Updated: 2024/02/12 15:01:18 by syamasaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ BSRCS = main_bonus.c\
 		sort_t_data_bonus.c\
 		put_dir_bonus.c put_result_bonus.c put_result_oneline_bonus.c\
 		put_result_comma_bonus.c put_str_color_bonus.c\
-		utils_bonus.c ft_funcs_bonus.c
+		utils_bonus.c ft_funcs_bonus.c exit_funcs_bonus.c
 BSRCS := $(addprefix $(BSRC_DIR), $(BSRCS))
 
 TMP_DIR = ./obj/

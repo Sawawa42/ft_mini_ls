@@ -6,7 +6,7 @@
 /*   By: syamasaw <syamasaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 15:01:58 by syamasaw          #+#    #+#             */
-/*   Updated: 2024/02/11 15:06:21 by syamasaw         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:02:33 by syamasaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ int	putstr_fd(const char *str, int fd)
 		i++;
 	}
 	return (fd - 1);
-}
-
-void	*puterror(char *error)
-{
-	putstr_fd(COMMAND_NAME, 2);
-	putstr_fd(error, 2);
-	return (NULL);
 }
 
 /*
